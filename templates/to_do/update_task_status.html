@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{% if task.is_done %}Task Completed {% else %}Task Undone {% endif %} </h1>
+    <p>The task has been successfully {% if task.is_done %}marked as Complete {% else %} Undone {% endif %}</p>
+    <a href="{% url 'to_do:task-list' %}"> Back to ToDoList</a>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+  <h1>
+    To Do List
+    <a href="{% url 'to_do:task-create' %}" class="btn btn-primary link-to-page">
+      Add task
+    </a>
+  </h1>
+    
+  {% if task_list %}
+          <table class="table">
+      <tr>
+        <th>Task content</th>
+          <th>Created date</th>
+          <th>Deadline</th>
+          <th>Tags</th>
+          <th>Update</th>
+          <th>Delete</th>
+          <th>Complete</th>
+          <th>Undo</th>
+      </tr>
+            {% for task in task_list %}
+                <tr>
+                    <td>
+                        {{ task.content }}
+                    </td>
+                    
+                    <td>
+                        {{ task.datetime_created }}
+                    </td>
+                    
+                    <td>
+                        {{ task.deadline }}
+                    </td>
+                    
+                    <td>
+                       {{ task.tags.all|join:", " }}
+                    </td>
+                    
+                    <td>
+                        <a href="{% url 'to_do:task-update' pk=task.id %}">
+                            Update
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="{% url 'to_do:task-delete' pk=task.id %}" style="color: red">
+                            Delete
+                        </a>
+                    </td>
+                
+                    <td>
+                        <a href="{% url 'to_do:task-completed' pk=task.id %}">
+                            Complete
+                        </a>
+                        
+                    </td>
+                        
+                    <td>
+                        <a href="{% url 'to_do:undo-completed' pk=task.id %}">
+                            Undo
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+          </table>
+  {% else %}
+      <p>There are no tasks</p>
+  {% endif %}
+{% endblock %}
