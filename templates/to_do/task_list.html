@@ -52,14 +52,14 @@
                     </td>
                 
                     <td>
-                        <a href="{% url 'to_do:task-completed' pk=task.id %}">
+                        <a href="{% url 'to_do:task-completed' pk=task.id %}" class="btn btn-success link-to-page">
                             Complete
                         </a>
                         
                     </td>
                         
                     <td>
-                        <a href="{% url 'to_do:undo-completed' pk=task.id %}">
+                        <a href="{% url 'to_do:undo-completed' pk=task.id %}" class="btn btn-secondary link-to-page">
                             Undo
                         </a>
                     </td>
