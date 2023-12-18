@@ -11,8 +11,7 @@ from .views import (
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
-    task_completed,
-    undo_completed,
+    update_task_status,
 )
 
 urlpatterns = [
@@ -21,8 +20,16 @@ urlpatterns = [
     path("tasks/create/", TaskCreateView.as_view(), name="task-create"),
     path("tasks/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
     path("tasks/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
-    path("tasks/<int:pk>/completed/", task_completed, name="task-completed"),
-    path("tasks/<int:pk>/undo/", undo_completed, name="undo-completed"),
+    path(
+        "tasks/<int:pk>/completed/",
+        lambda request, pk: update_task_status(request, pk, is_done=True),
+        name="task-completed",
+    ),
+    path(
+        "tasks/<int:pk>/undo/",
+        lambda request, pk: update_task_status(request, pk, is_done=False),
+        name="undo-completed",
+    ),
     path("tags/", TagListView.as_view(), name="tag-list"),
     path("tags/add/", TagAddView.as_view(), name="tag-add"),
     path("tags/<int:pk>/update/", TagUpdateView.as_view(), name="tag-update"),
