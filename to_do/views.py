@@ -44,14 +44,6 @@ def update_task_status(request, pk, is_done):
     return render(request, "to_do/update_task_status.html", context=context)
 
 
-def task_completed(request, pk):
-    return update_task_status(request, pk, is_done=True)
-
-
-def undo_completed(request, pk):
-    return update_task_status(request, pk, is_done=False)
-
-
 def tags(request):
     form = Tag
     return render(request, "to_do/tag_form.html", {"form": form})
